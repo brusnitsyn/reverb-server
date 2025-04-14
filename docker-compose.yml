@@ -1,0 +1,29 @@
+version: '3.8'
+services:
+    reverb-server:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        container_name: reverb-server
+        restart: unless-stopped
+        ports:
+            - '3333:8080'
+        volumes:
+            - '.:/var/www/html'
+        environment:
+            - APP_ENV=production
+        networks:
+            - reverb-network
+    redis:
+        image: 'redis:latest'
+        restart: unless-stopped
+        ports:
+            - '6379:6379'
+        networks:
+            - reverb-network
+networks:
+    reverb-network:
+        driver: bridge
+volumes:
+    sail-redis:
+        driver: local
