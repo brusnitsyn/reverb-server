@@ -8,7 +8,7 @@ Route::prefix('sse')->group(function () {
             while (true) {
 
                 echo "data: " . json_encode([
-                        'time' => \Illuminate\Support\Carbon::now()->toDateTimeString(),
+                        'time' => \Illuminate\Support\Carbon::now()->toDateTimeLocalString(),
                         'event' => 'ServerTimeEvent'
                     ]) . "\n\n";
 
